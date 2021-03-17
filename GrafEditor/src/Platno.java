@@ -165,8 +165,10 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println("typed");
-		
+		if (e.getKeyCode() == KeyEvent.VK_F5) {
+			for (Tocka v : graf.tocke.values()) izbraneTocke.add(v);
+		}
+		repaint();
 	}
 	
 	@Override
