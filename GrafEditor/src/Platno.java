@@ -99,6 +99,7 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if (graf == null) return;
 		int x = e.getX();
 		int y = e.getY();
 		klikX = x;
@@ -106,6 +107,7 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 		stariX = x;
 		stariY = y;
 		Tocka izbranaTocka = null;
+		double najmanjsaRazdalja = 0;
 		for (Tocka u : graf.tocke.values()) {
 			if ((u.x - x)*(u.x - x) + (u.y - y)*(u.y - y) < polmer*polmer) aktivnaTocka = u;
 		}
@@ -165,9 +167,19 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_F5) {
-			for (Tocka v : graf.tocke.values()) izbraneTocke.add(v);
+		char tipka = e.getKeyChar();
+		if (tipka == 'a') {
+			izbraneTocke.addAll(graf.tocke.values());
 		}
+		else if (tipka == 's') {
+			izbraneTocke.clear();
+		}
+		else if (tipka == 't') {
+			for (Tocka v : izbraneTocke) graf.odstraniTocko(v);
+			izbraneTocke.clear();
+		}
+		// manjka
+		
 		repaint();
 	}
 	

@@ -1,3 +1,7 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +33,8 @@ public class Graf {
 		}
 		return v; 
 	}
+	
+	
 	
 	public Tocka dodajTocko() {
 		while (true) {
@@ -130,6 +136,39 @@ public class Graf {
 			v.y = x + r * Math.sin(2 * i * Math.PI / n);
 			++i;
 		}
+	}
+	
+	public void shrani(String ime) {
+		// 1: ...
+		// 1: sosede, 2: 
+		//try (FileWriter in = new FileWriter("/Path/in.txt")) {
+		//	int c;
+			//while ((c = in.read()) != -1) out.write(c);
+			//} catch (IOException exn) {
+			//exn.printStackTrace();
+			//}
+		
+		try {
+			PrintWriter datoteka = new PrintWriter(new FileWriter(ime));
+			for (Tocka u : tocke.values()) {
+				datoteka.println(u + ": " + u.x + " " + u.y);
+			}
+			datoteka.println("***");
+			for (Tocka v : tocke.values()) {
+				datoteka.print(v + ": ");
+				for (Tocka u : v.sosedi) {
+					datoteka.print(u);
+				}
+				datoteka.println();
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
 	}
 	
 
